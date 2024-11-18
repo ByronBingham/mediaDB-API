@@ -1,15 +1,14 @@
 # syntax=docker/dockerfile:1
 
-FROM ubuntu:23.04 AS jar
-RUN apt-get update
-RUN apt-get install openjdk-11-jdk -y
-RUN apt-get install maven -y
-
-COPY ./bmedia_api /bmedia_api
+FROM maven:3-eclipse-temurin-21 AS jar
+ARG ARG_VERSION
+ENV VERSION=${ARG_VERSION}
+COPY . /bmedia_api
 WORKDIR /bmedia_api
 RUN mvn package
 
-FROM adoptopenjdk/openjdk11
+FROM eclipse-temurin:21
+ARG ARG_VERSION
 RUN mkdir /share
-COPY --from=jar /bmedia_api/target/bmedia_api-1.0-SNAPSHOT-jar-with-dependencies.jar /bmedia_api.jar
-CMD ["java", "-jar", "/bmedia_api.jar", "/db_config.json", "--server.port=38001"]
+COPY --from=jar /bmedia_api/target/bmedia_api-${ARG_VERSION}-jar-with-dependencies.jar /bmedia_api.jar
+CMD ["java", "-jar", "/bmedia_api.jar", "/mediaDB-Config/db_config.json", "--server.port=38001"]
