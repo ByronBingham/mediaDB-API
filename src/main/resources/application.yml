@@ -1,0 +1,11 @@
+server:
+  port: 38001
+  http2:
+      enabled: true
+  ssl:
+    enabled: true
+    key-alias: tomcat
+    key-store: ".keystore"
+    key-store-type: jks
+    key-store-password: changeit
+    key-password: changeit
