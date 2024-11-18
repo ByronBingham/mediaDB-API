@@ -1,0 +1,3 @@
+[submodule "mediaDB-Config"]
+	path = mediaDB-Config
+	url = git@github.com:ByronBingham/mediaDB-Config.git
