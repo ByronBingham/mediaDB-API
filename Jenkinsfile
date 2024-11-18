@@ -11,7 +11,7 @@ pipeline {
                     def props = readProperties file: '.properties'  // readProperties requires pipeline utility steps plugin
                     version = props.version
                 }
-                sh "docker build -t ${LOCAL_REG_URL}/bmedia_api:${version}_SNAPSHOT -f ./docker/api/ApiDockerfile ."
+                sh "docker build -t ${LOCAL_REG_URL}/bmedia_api:${version}_SNAPSHOT --build-arg ARG_VERSION=${version} ."
                 sh "docker push ${LOCAL_REG_URL}/bmedia_api:${version}_SNAPSHOT"
             }            
         }
