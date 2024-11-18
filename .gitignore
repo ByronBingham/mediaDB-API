@@ -13,5 +13,8 @@
 *.tar.gz
 *.rar
 
+# Maven
+target/
+
 # IDE
 .idea
