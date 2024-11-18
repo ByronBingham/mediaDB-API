@@ -8,7 +8,7 @@ pipeline {
             steps {
                 checkout scm
                 script {
-                    def props = readProperties file: '.properties'  // readProperties requires pipeline utility steps plugin
+                    def props = readProperties file: 'version'  // readProperties requires pipeline utility steps plugin
                     version = props.version
                 }
                 sh "docker build -t ${LOCAL_REG_URL}/bmedia_api:${version}_SNAPSHOT --build-arg ARG_VERSION=${version} ."
